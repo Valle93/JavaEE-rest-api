@@ -104,13 +104,6 @@ public class Database {
     public List<Order> orderListByCustomerId(int id) {
         List<User> chosenCustomer = customerList.parallelStream().filter(customer -> customer.getId() == id).collect(Collectors.toList());
         return chosenCustomer.get(0).getPurchaseHistory().getOrders();
-//        List<Order> orders = new ArrayList<>();
-//        for (User user : customerList) {
-//            if (user.getId() == id) {
-//                orders = user.getPurchaseHistory().getOrders();
-//            }
-//        }
-//        return orders;
     }
 
     public List<OrderInfo> itemListByOrderId(int id) {

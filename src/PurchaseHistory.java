@@ -20,10 +20,12 @@ public class PurchaseHistory implements Serializable {
         orders.add(order);
     }
 
+    /**
+     * Metoden kalkylerar den totala summan som en kund har spenderat
+     * @return: Totala summan som en kund har spenderat
+     */
     public int getTotalSpent() {
-        AtomicInteger totalSpent = new AtomicInteger();
-        orders.forEach(order -> order.getItems().forEach(item ->
-                totalSpent.addAndGet((item.getQuantity() * item.getRecord().getPrice()))));
-        return totalSpent.get();
+        return orders.parallelStream().mapToInt(order -> order.getItems().parallelStream()
+                .mapToInt(item -> item.getQuantity() * item.getRecord().getPrice()).sum()).sum();
     }
 }

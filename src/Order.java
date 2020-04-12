@@ -29,15 +29,23 @@ public class Order implements Serializable {
         this.items = items;
     }
 
-    // Metod som lägger till ny produkter till ordern
     public void addNewProductToOrder(Record record, int quantity) {
         items.add(new OrderInfo(record, quantity));
     }
 
+
+    /**
+     * Metoden kalkylerar en beställnings total summa
+     * @return: summan för en beställning
+     */
     public int getOrderTotal() {
         return items.parallelStream().mapToInt(item -> item.getQuantity() * item.getRecord().getPrice()).sum();
     }
 
+    /**
+     * Metoden räknar ut antalet produkter i en order
+     * @return: antalet produkter i en order
+     */
     public int getItemsQuantity() {
         return items.parallelStream().mapToInt(item -> item.getQuantity()).sum();
     }

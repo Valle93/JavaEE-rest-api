@@ -1,6 +1,5 @@
 # Project exclude paths
 /out/
 *.class
-/.idea/
 Webshop-G09.iml
 /.idea

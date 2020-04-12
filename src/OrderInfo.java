@@ -28,6 +28,10 @@ public class OrderInfo implements Serializable {
         this.quantity = quantity;
     }
 
+    /**
+     * Metoden räknar ut summan av antalet av en specifik produkt
+     * @return: summa
+     */
     public int getTotalPrice() {
         return quantity * record.getPrice();
     }
