@@ -5,6 +5,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Named
@@ -13,10 +15,14 @@ public class Controller implements Serializable {
 
     private Database database;
     private List<Record> recordList;
+
     private String pwd;
     private String username;
     private User currentUser;
     private String search;
+    private String firstName;
+    private String lastName;
+
     private List<CartItem> cartItems;
     private int cartLength;
     private List<Order> tempOrderList;
@@ -68,6 +74,22 @@ public class Controller implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public User getCurrentUser() {
@@ -127,7 +149,7 @@ public class Controller implements Serializable {
     }
 
     public String validateUsernamePassword() {
-        User user = LoginDAO.validate(username, pwd);
+        User user = LoginDAO.validate(username, pwd, database);
         if (user != null) {
             currentUser = user;
             clearInputField();
@@ -173,7 +195,7 @@ public class Controller implements Serializable {
 
     private void updateCartLength() {
         int count = 0;
-        for (CartItem cartItem: cartItems) {
+        for (CartItem cartItem : cartItems) {
             count += cartItem.getQty();
         }
         this.cartLength = count;
@@ -194,10 +216,29 @@ public class Controller implements Serializable {
     }
 
     public String getCartIconStatus() {
-        if(cartItems.size()>0) {
+        if (cartItems.size() > 0) {
             return "visible";
         } else {
             return "hidden";
         }
+    }
+
+    public String registerUser() {
+        User user = new User(this.username, this.firstName, this.lastName, this.pwd, Role.CUSTOMER, database.getUserList().get(database.getUserList().size() - 1).getId() + 1);
+
+        for (User user1 : database.getUserList()) {
+
+            if (user1.getUserName().equalsIgnoreCase(this.username)) {
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                "Username is already taken",
+                                "Please enter another username"));
+                return "registerUser";
+            }
+        }
+        database.getUserList().add(user);
+        currentUser = user;
+        return "shop";
     }
 }

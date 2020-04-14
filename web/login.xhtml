@@ -23,7 +23,10 @@
     </div>
 
     <h:commandButton styleClass="btn login-btn" action="#{controller.validateUsernamePassword}" value="Login"/>
-    <h:commandButton styleClass="btn login-btn" value="Register"/>
+</h:form>
+
+<h:form styleClass="login-form">
+    <h:commandButton styleClass="btn login-btn" action="registerUser" value="Register"/>
 </h:form>
 
 </body>

@@ -4,9 +4,7 @@ import java.util.logging.Logger;
 public class LoginDAO {
 
 
-    public static User validate(String userName, String password){
-
-        Database database = new Database();
+    public static User validate(String userName, String password, Database database){
 
         for (User user: database.getUserList()) {
             if (user.getUserName().equalsIgnoreCase(userName)) {
