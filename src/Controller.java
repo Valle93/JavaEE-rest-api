@@ -140,7 +140,6 @@ public class Controller implements Serializable {
                             "Please enter correct username and Password"));
             return "login";
         }
-
     }
 
     public String logout() {
@@ -201,5 +200,4 @@ public class Controller implements Serializable {
             return "hidden";
         }
     }
-
 }
