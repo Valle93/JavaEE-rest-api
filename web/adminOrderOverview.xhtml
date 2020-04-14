@@ -25,11 +25,11 @@
         <h:dataTable styleClass="table" value="#{controller.tempOrderList}" var="order" cellpadding="10">
             <h:column>
                 <f:facet name="header">Ordernumber</f:facet>
-                <h:outputText value="165169"/>
+                <h:outputText value="#{order.id}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">Date</f:facet>
-                <h:outputText value="2020-01-30"/>
+                <h:outputText value="#{order.date}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">Quantity</f:facet>

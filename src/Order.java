@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,11 +7,21 @@ public class Order implements Serializable {
 
     private int id;
     private List<OrderInfo> items = new ArrayList<>();
+    LocalDate date;
     private int orderTotal;
     private int itemsQuantity;
 
-    public Order(int id) {
+    public Order(int id, LocalDate date) {
         this.id = id;
+        this.date = date;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getId() {

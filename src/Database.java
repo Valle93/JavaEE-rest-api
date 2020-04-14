@@ -1,5 +1,6 @@
 import java.beans.Customizer;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,9 +24,9 @@ public class Database {
         // Test för admin
         PurchaseHistory purchaseHistory1 = new PurchaseHistory();
         PurchaseHistory purchaseHistory2 = new PurchaseHistory();
-        Order order1 = new Order(1);
-        Order order2 = new Order(2);
-        Order order3 = new Order(3);
+        Order order1 = new Order(1, LocalDate.of(2020, 1, 8));
+        Order order2 = new Order(2, LocalDate.of(2019, 12, 15));
+        Order order3 = new Order(3, LocalDate.of(2020, 3, 3));
         order1.addNewProductToOrder(new Record(1,"Toto","Old is new","toto-1.jpg", 149),3000);
         order2.addNewProductToOrder(new Record(2,"Excalibur","Live In Brocéliande","excalibur-1.jpg", 209),2);
         order2.addNewProductToOrder(new Record(3,"Streaplers","En gång till","streaplers-1.jpg",79),10);
