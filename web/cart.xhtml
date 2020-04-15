@@ -11,6 +11,17 @@
 <h:body>
     <h:outputLabel value="This is your Cart"/>
     <h:form>
+        <div class="wrapper">
+            <ui:repeat var="temp" value="#{controller.getCartItems()}">
+                <div class="product">
+                        <h:graphicImage library="images" name="#{temp.record.imgURL}" width="100px" height="100px"/>
+                        <p class="artist">#{temp.record.artist}</p>
+                        <p class="title">#{temp.record.title}</p>
+                        <p class="price">#{temp.record.price}:-</p>
+                        <p class="qty">Quantity: #{temp.qty}</p>
+                </div>
+            </ui:repeat>
+        </div>
         <h:commandButton value="confirmation" action="confirmation"/>
     </h:form>
 </h:body>
